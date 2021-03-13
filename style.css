@@ -1,0 +1,93 @@
+html
+{
+	background-image: url('background.jpg');
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.title
+{
+	padding: 0;
+	margin: 0;
+	border: 0;
+	color: #f5f7cd;
+	font-size: 45px;
+	font-family: Arial Black;
+	position: absolute;
+	top: 0;
+	left: 40%;
+}
+
+canvas
+{
+	position: absolute;
+	top: 30%;
+	left: 13%;
+	background-color: #f5f7cd;
+}
+
+#button_container
+{
+	background-color: none;
+	position: absolute;
+	top: 11%;
+	left: 20%;
+	width: 60%;
+	height: 6%;
+}
+
+.button
+{
+	background: #FF9973;
+	border: none;
+	color: #000035;
+	font-size: 20px;
+	font-family: Trebuchet MS;
+	position: absolute;
+	width:25%;
+	height:100%;
+	border-radius: 10px;
+	outline: none;
+	cursor: pointer;
+}
+
+.button:nth-child(1)
+{
+	top:0;
+	left:23%;
+}
+
+.button:nth-child(2)
+{
+	top:0;
+	left:50%;
+}
+
+.button:nth-child(3)
+{
+	top:0;
+	right:5%;
+	background: #9797FF;
+	width: 7%;
+}
+
+#radiustext
+{
+	color: #f5f7cd;
+	position: absolute;
+	top: 20.3%;
+	left: 50%;
+	padding: 0;
+	margin: 0;
+}
+
+#radiusinput
+{
+	position: absolute;
+	top: 20%;
+	left: 54%;
+	width: 10%;
+	outline: none;
+}
