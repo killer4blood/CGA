@@ -60,6 +60,7 @@ function clearcanvas()
 {
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	document.getElementById("radiusinput").value="";
+	document.getElementById("colorinput").value="";
 	covercanvas();
 }
 
