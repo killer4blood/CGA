@@ -24,7 +24,7 @@ canvas
 {
 	position: absolute;
 	top: 30%;
-	left: 13%;
+	left: 11.5%;
 	background-color: #f5f7cd;
 }
 
@@ -90,4 +90,106 @@ canvas
 	left: 54%;
 	width: 10%;
 	outline: none;
+}
+
+#flood
+{
+	color: #f5f7cd;
+	position: absolute;
+	padding:0;
+	margin:0;
+	top: 30%;
+	right: 4%;
+}
+
+#flood_buttoncontainer
+{
+	background-color: none;
+	position: absolute;
+	top: 34%;
+	right: 1.5%;
+	width: 10%;
+	height: 10%;
+}
+
+.floodbutton
+{
+	background: #FF9973;
+	border: none;
+	color: #000035;
+	font-size: 20px;
+	font-family: Trebuchet MS;
+	position: absolute;
+	width:40%;
+	height:50%;
+	border-radius: 10px;
+	outline: none;
+	cursor: pointer;
+}
+
+.floodbutton:nth-child(1)
+{
+	top: 0;
+	left: 5%;
+	background: #5CFF5C;
+}
+
+#color_container
+{
+	background-color: none;
+	position: absolute;
+	top: 34%;
+	left: 2%;
+	width: 8%;
+	height: 30%;
+}
+
+.colorchoice
+{
+	border: none;
+	position: absolute;
+	width:50%;
+	height:25%;
+	border-radius: 10px;
+	outline: none;
+	cursor: pointer;
+}
+
+.colorchoice:nth-child(1)
+{
+	background: red;
+	top:0;
+	left:25%;
+}
+
+.colorchoice:nth-child(2)
+{
+	background: blue;
+	top:28%;
+	left:25%;
+}
+
+.colorchoice:nth-child(3)
+{
+	background: green;
+	top:56%;
+	left:25%;
+}
+
+#colorinput
+{
+	position:absolute;
+	top: 20%;
+	right: 3%;
+	width: 5%;
+}
+
+#colortext
+{
+	color: #f5f7cd;
+	position: absolute;
+	top: 20%;
+	left: 77%;
+	padding: 0;
+	margin: 0;
 }
