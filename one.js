@@ -7,7 +7,7 @@ window.onload=function() {covercanvas()};
 
 function covercanvas()
 {
-	c.fillStyle="plum";
+	c.fillStyle="#f5f7cd";
 	c.fillRect(0, 0, 1030, 430);
 }
 
@@ -143,4 +143,36 @@ function hexAToRGBA(h) {
   a = +(a / 255).toFixed(3);
 
   return "rgba(" + +r + "," + +g + "," + +b + "," + a + ")";
+}
+
+function boundaryrecursive()
+{
+	let x=0;
+	let y=0;
+	
+	canvas.addEventListener('click', e => {
+		x = e.offsetX;
+		y = e.offsetY;
+		
+		var fillcolor = document.getElementById("colorinput").value;
+		var fill = hexAToRGBA(fillcolor);
+		var boundarycolor = document.getElementById("blackboundary");
+		var bound_color = hexAToRGBA(window.getComputedStyle(boundarycolor, null).getPropertyValue("background"));
+		alert(bound_color);
+		//boundary(c, x, y, fill, bound_color, fillcolor);
+	});
+}
+
+function boundary(c, x, y, fill, bound_color, fillcolor)
+{
+	var currentpixel = c.getImageData(x, y, 1, 1).data;
+	var currentpix = hexAToRGBA(currentpixel);
+	if (currentpix != fill && currentpix != bound_color)
+	{
+		putpixel(c, x, y, fillcolor);
+		boundary(c, x+1, y, fill, bound_color, fillcolor);
+		boundary(c, x-1, y, fill, bound_color, fillcolor);
+		boundary(c, x, y+1, fill, bound_color, fillcolor);
+		boundary(c, x, y-1, fill, bound_color, fillcolor);
+	}
 }
