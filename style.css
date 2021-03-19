@@ -134,6 +134,27 @@ canvas
 	background: #5CFF5C;
 }
 
+.floodbutton:nth-child(2)
+{
+	top: 0;
+	right: 5%;
+	background: #5CFF5C;
+}
+
+.floodbutton:nth-child(3)
+{
+	top: 80%;
+	left: 5%;
+	background: plum;
+}
+
+.floodbutton:nth-child(4)
+{
+	top: 80%;
+	right: 5%;
+	background: plum;
+}
+
 #colorinput
 {
 	position:absolute;
@@ -192,6 +213,27 @@ canvas
 	top: 0;
 	left: 5%;
 	background: #5CFF5C;
+}
+
+.boundarybutton:nth-child(2)
+{
+	top: 0;
+	right: 5%;
+	background: #5CFF5C;
+}
+
+.boundarybutton:nth-child(3)
+{
+	top: 80%;
+	left: 5%;
+	background: plum;
+}
+
+.boundarybutton:nth-child(4)
+{
+	top: 80%;
+	right: 5%;
+	background: plum;
 }
 
 #blackboundary
