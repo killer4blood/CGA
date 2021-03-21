@@ -148,6 +148,54 @@ function hexAToRGBA(h) {
   return "rgba(" + +r + "," + +g + "," + +b + "," + +a + ")";
 }
 
+function floodstack()
+{
+	let x=0;
+	let y=0;
+	
+	canvas.addEventListener('click', e => {
+		x = e.offsetX;
+		y = e.offsetY;
+		
+		var basecolor = c.getImageData(x, y, 1, 1).data;
+		var base = hexAToRGBA(basecolor);
+		var fillcolor = document.getElementById("colorinput").value;
+		//var fill = hexAToRGBA(fillcolor);
+		
+		floodstacked(c, x, y, base, fillcolor);
+	});
+}
+
+function floodstacked(c, x, y, base, fillcolor)
+{
+	const dx = [0, 1, 0, -1];
+	const dy = [-1, 0, 1, 0];
+	var i;
+	var nx;
+	var ny;
+	
+	var stack = new Stack();
+	stack.push((x,y));
+	//alert("above while");
+	while(stack.pop())
+	{
+		//alert("inside while");
+		putpixel(c, x, y, fillcolor);
+		for(i = 0; i < 4; i+-1)
+		{
+			//alert("inside for");
+			nx = x+dx[i];
+			ny = y+dy[i];
+			if(nx >= 0 && nx < canvas.width && ny >= 0 && ny < canvas.height && getpixelcolor(c, nx, ny) === base)
+			{
+				//alert("inside if");
+				stack.push((nx, ny));
+			}
+		}
+	}
+}
+
+//this is scanline recursive ----------------------------------
 function floodscanline()
 {
 	let x=0;
@@ -184,7 +232,7 @@ function floodscan(c, x, y, base, fillcolor, fill)
 	}
 	
 	x1 = x;
-	alert(getpixelcolor(c, x1, y) + " " + fill);
+	//alert(getpixelcolor(c, x1, y) + " " + fill);
 	while(x1<canvas.width && getpixelcolor(c, x1, y) === fill)
 	{
 		alert("inside the 3rd one");
@@ -233,7 +281,126 @@ function getpixelcolor(c, x, y)
 	return pixelcolor;
 }
 
+//flood scanline stack ---------------------------------------------
+function floodscanlinestack()
+{
+	let x=0;
+	let y=0;
+	
+	canvas.addEventListener('click', e => {
+		x = e.offsetX;
+		y = e.offsetY;
+		
+		var basecolor = c.getImageData(x, y, 1, 1).data;
+		var base = hexAToRGBA(basecolor);
+		var fillcolor = document.getElementById("colorinput").value;
+		
+		floodscanstack(c, x, y, base, fillcolor);
+	});
+}
 
+class Stack {
+    constructor(){
+        this.data = [];
+        this.top = 0;
+    }
+    push(element) {
+      this.data[this.top] = element;
+      this.top = this.top + 1;
+    }
+   length() {
+      return this.top;
+   }
+   peek() {
+      return this.data[this.top-1];
+   }
+   isEmpty() {
+     return this.top === 0;
+   }
+   pop() {
+    if( this.isEmpty() === false ) {
+       this.top = this.top -1;
+       return this.data.pop(); // removes the last element
+     }
+   }
+   print() {
+      var top = this.top - 1; // because top points to index where new    element to be inserted
+      while(top >= 0) { // print upto 0th index
+          console.log(this.data[top]);
+           top--;
+       }
+    }
+    reverse() {
+       this._reverse(this.top - 1 );
+    }
+    _reverse(index) {
+       if(index != 0) {
+          this._reverse(index-1);
+       }
+       console.log(this.data[index]);
+    }
+}
+
+function floodscanstack(c, x, y, base, fillcolor)
+{
+	var spanAbove=false;
+	var spanBelow=false;
+	var stack = new Stack();
+	var x1;
+	stack.push((x, y));
+	//alert("above while");
+	while(stack.pop())
+	{
+		//alert("inside while");
+		x1 = x;
+		/*while(x1>=0 && getpixelcolor(c, x1, y) === base)
+		{
+			x1-=1;
+		}
+		x+=1;
+		spanAbove = spanBelow = false;*/
+		while(x1<canvas.width && getpixelcolor(c, x1, y) === base)
+		{
+			putpixel(c, x1, y, fillcolor);
+			if(!spanAbove && y>0 && getpixelcolor(c, x1, y-1) === base)
+			{
+				//alert("inside if 1");
+				stack.push((x1, y-1));
+				//stack.push(pixelcoor(c, x1, y-1));
+				spanAbove = true;
+			} else if(spanAbove && y>0 && getpixelcolor(c, x1, y-1) != base)
+			{
+				//alert("inside elseif 1");
+				spanAbove = false;
+			}
+			
+			if(!spanBelow && y<canvas.height - 1 && getpixelcolor(c, x1, y+1) === base)
+			{
+				//alert("inside if 2");
+				stack.push((x1, y+1));
+				//stack.push(pixelcoor(c, x1, y+1));
+				spanBelow = true;
+			} else if(spanBelow && y<canvas.height - 1 && getpixelcolor(c, x1, y+1) != base)
+			{
+				//alert("inside elseif 2");
+				spanBelow = false;
+			}
+			x1+=1;
+		}
+	}
+}
+
+/*function pixelcoor(c, x, y)
+{
+	for (y=0; y<canvas.height ; y+=1)
+	{
+		for(x=0; x<canvas.width ; x+=1)
+		{
+			var i=(y*w+x)*4;
+			var r=d[i],g=d[i+1],b=d[i+2],a=d[i+3];
+		}
+	}
+}*/
 
 //boundary functions -----------------------------------------------------------------------
 
